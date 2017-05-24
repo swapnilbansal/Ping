@@ -1,0 +1,24 @@
+<ion-view title="Users">
+    <ion-nav-buttons side="right" >
+    <button class="button button-clear button-positive" ng-click="share.shareNote()">Share</button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="left" >
+        <button class="button button-clear button-positive" ng-click="share.hide()">Cancel</button>
+    </ion-nav-buttons>
+
+    <ion-content>
+
+        <ion-list ng-repeat="user in share.users">
+
+
+              <ion-checkbox ng-model="share.checked[user._id]">  <h2>{{ user.profile.name }}</h2></ion-checkbox>
+
+        </ion-list>
+
+    </ion-content>
+
+
+
+
+</ion-view>
+

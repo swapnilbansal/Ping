@@ -1,0 +1,35 @@
+<ion-view view-title="Chats">
+    <ion-nav-buttons side="right">
+        <button ng-click="chats.showNewChatModal()" class="button button-clear button-calm fa fa-user-plus"></button>
+    </ion-nav-buttons>
+
+    <ion-content>
+        <ion-list>
+            <ion-item  ng-repeat="chat in chats.data | orderBy:'-lastMessage.timestamp'"
+                       ng-if="chat.isDisplay==1"
+                      on-hold="chats.showNewChatModal1(chat._id)"
+                      class="item item-thumbnail-left"
+                      type="item-text-wrap"
+                      href="#/tab/chats/{{ chat._id }}">
+
+                        <img ng-src="{{ chat | chatPicture }}">
+                        <h2>{{ chat | chatName }}</h2>
+                <ng-switch on="chat.lastMessage.type">
+                    <p ng-switch-when="text">{{ chat.lastMessage.text }}</p>
+                    <p ng-switch-when="picture">Image</p>
+                    <p ng-switch-when="game">Game</p>
+                </ng-switch>
+                <i ng-if="chat.lastMessage.status!=2 && chat.lastMessage.userId!=$root.currentUser._id" class="icon fa fa-bullseye unread"></i>
+
+                <p class="last-message-timestamp">{{ chat.lastMessage.timestamp | calendar }}</p>
+
+
+                <ion-option-button class="button-assertive" ng-click="chats.remove(chat)">
+                    Delete
+                </ion-option-button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
+
+<!-- <i class="icon ion-chevron-right icon-accessory"></i>-->

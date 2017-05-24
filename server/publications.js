@@ -1,0 +1,38 @@
+import { Meteor } from 'meteor/meteor';
+import { Chats, Messages,Notes,Game } from '../lib/collections';
+
+Meteor.publish('users', function() {
+    return Meteor.users.find({}, { fields: { profile: 1 } });
+    });
+Meteor.publish('notes',function(){
+    return Notes.find();
+});
+Meteor.publish('game',function(){
+    return Game.find();
+});
+
+
+Meteor.publishComposite('chats', function() {
+    if (!this.userId) return;
+
+    return {
+        find() {
+            return Chats.find({ userIds: this.userId });
+        },
+        children: [
+            {
+                find(chat) {
+                    return Messages.find({ chatId: chat._id });
+                }
+            },
+            {
+                find(chat) {
+                    const query = { _id: { $in: chat.userIds } };
+                    const options = { fields: { profile: 1 } };
+
+                    return Meteor.users.find(query, options);
+                }
+            }
+        ]
+    };
+});

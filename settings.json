@@ -1,0 +1,6 @@
+meteor {
+  "ACCOUNTS_PHONE": {
+    "ADMIN_NUMBERS": ["1234567899", "9876543211"],
+    "MASTER_CODE": "1234"
+  }
+}

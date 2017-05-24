@@ -1,0 +1,27 @@
+<ion-view title="Unread messages of {{ chat.data | chatName }}">
+    <ion-nav-buttons side="left">
+            <button class="button button-clear button-positive" ng-click="chat.hideNewChatModal()">Cancel</button>
+
+    </ion-nav-buttons>
+
+    <ion-content class="chat" delegate-handle="chatScroll">
+        <div class="message-list">
+            <div ng-repeat="message in chat.messages" class="message-wrapper">
+                <div  class="message message-other" >
+                    <ng-switch on="message.type">
+                        <div ng-switch-when="text" class="text" >{{ message.text }}</div>
+                        <div ng-switch-when="picture" class="picture">
+                            <img ng-src="{{ message.picture }}">
+                        </div>
+                        <!--amDateFormat: 'HH:MM'-->
+                    </ng-switch>
+                    <span class="message-timestamp">{{ message.timestamp | calendar }}</span>
+
+                </div>
+            </div>
+        </div>
+    </ion-content>
+
+
+</ion-view>
+

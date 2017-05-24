@@ -1,0 +1,58 @@
+<ion-view title="TicTacToe" >
+    <ion-nav-buttons side="right">
+        <button class="button button-clear button-positive" ng-click="game.hide();game.send()">Done</button>
+    </ion-nav-buttons>
+  
+
+
+    <ion-content >
+<div class="turn">
+              <span ng-if="game.data.turnId!=$root.currentUser._id && game.data.gameStatus!=1">
+        OPPONENT'S TURN
+    </span>
+
+        <span ng-if="game.data.turnId===$root.currentUser._id && game.data.gameStatus!=1" >
+            YOUR TURN
+    </span>
+</div>
+
+
+        <table class="center">
+            <tr  id="game" >
+                <td><button class="butt" ng-click="game.change(0)" >{{game.data.gameScore[0]}}</button></td>
+                <td><button class="butt" ng-click="game.change(1)">{{game.data.gameScore[1]}}</button></td>
+                <td><button class="butt" ng-click="game.change(2)" >{{game.data.gameScore[2]}}</button></td>
+            </tr>
+            <tr  id="game" >
+                <td><button class="butt" ng-click="game.change(3)">{{game.data.gameScore[3]}}</button></td>
+                <td><button class="butt" ng-click="game.change(4)">{{game.data.gameScore[4]}}</button></td>
+                <td><button class="butt" ng-click="game.change(5)">{{game.data.gameScore[5]}}</button></td>
+            </tr>
+            <tr  id="game" >
+                <td><button class="butt" ng-click="game.change(6)">{{game.data.gameScore[6]}}</button></td>
+                <td><button class="butt" ng-click="game.change(7)">{{game.data.gameScore[7]}}</button></td>
+                <td><button class="butt" ng-click="game.change(8)">{{game.data.gameScore[8]}}</button></td>
+            </tr>
+        </table>
+
+        <div class="turn">
+            <span ng-if="game.data.gameStatus===1&&game.data.winnerId===$root.currentUser._id">
+        You Win!!
+         </span>
+            <span ng-if="game.data.gameStatus===1&&game.data.winnerId!=$root.currentUser._id">
+        You Lose :(
+    </span>
+            <span ng-if="game.data.gameStatus===2">
+       A Tie :)
+    </span>
+
+
+        </div>
+
+
+
+
+
+
+    </ion-content>
+</ion-view>
